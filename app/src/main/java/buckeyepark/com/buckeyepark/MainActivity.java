@@ -35,6 +35,23 @@ public class MainActivity extends Activity {
     static String PERCENTAGE = "Percent Full";
     static String KEYCARDACCESS = "KeyCard Access";
     static String GARAGEPIC = "Garage Pic";
+    static final String WESTLANE ="http://osu.campusparc.com/images/garage-photos/west-lane-garage.jpg?sfvrsn=2";
+    static final String OHIOUNIONSOUTH = "http://osu.campusparc.com/images/garage-photos/ohio-southgarage.jpg?sfvrsn=0";
+    static final String ARPSHALL = "http://osu.campusparc.com/images/garage-photos/arps-garage.jpg?sfvrsn=0";
+    static final String TWELVEAVE = "https://www.osu.edu/map/buildingImg.php?id=387&size=campusmap";
+    static final String SOUTHGATEWAY ="http://osu.campusparc.com/images/page-header/web-pageheader-gateway.jpg?sfvrsn=0";
+    static final String TUTTLEPARKPLACE ="http://osu.campusparc.com/images/page-header/web-pageheader-tuttle.jpg?sfvrsn=0";
+    static final String OHIOUNIONNORTH ="http://osu.campusparc.com/images/garage-photos/north-garage.jpg?sfvrsn=0";
+    static final String NINTHAVENUEEAST ="http://osu.campusparc.com/images/page-header/web-pageheader-9theast.jpg?sfvrsn=0";
+    static final String LANEAVE ="http://osu.campusparc.com/images/misc-images/lag7.jpg?sfvrsn=0";
+    static final String NORTHCANNON ="http://osu.campusparc.com/images/garage-photos/north-cannon-garage.jpg?sfvrsn=0";
+    static final String ELEVENTHAVE ="http://osu.campusparc.com/images/garage-photos/11thavegarage.jpg?sfvrsn=4";
+    static final String NEILAVE ="http://osu.campusparc.com/images/garage-photos/neil-avegarage.jpg?sfvrsn=0";
+    static final String SOUTHCANNON ="http://osu.campusparc.com/images/garage-photos/south-cannon-garage.jpg?sfvrsn=0";
+    static final String SAFEAUTO ="http://osu.campusparc.com/images/page-header/web-pageheader-safeauto.jpg?sfvrsn=0";
+    static final String NINTHWEST ="http://osu.campusparc.com/images/page-header/web-pageheader-9thwest.jpg?sfvrsn=0";
+    static final String NORTHWEST ="http://osu.campusparc.com/images/garage-photos/northwestgarage.jpg?sfvrsn=0";
+
 
     // URL Address
     String url = "http://osu.campusparc.com/Sitefinity/Public/Services/GarageGraph.asmx/load?GarageId=0&GradientBarWidth=190";
@@ -93,7 +110,7 @@ public class MainActivity extends Activity {
                     String garageName = linkToGarage.text();
                     Element visitorAccess = row.select("td").get(3);
                     Element KeyCardAccess = row.select("td").get(4);
-                    String imgSrcStr = "http://osu.campusparc.com/images/page-header/web-pageheader-9thwest.jpg?sfvrsn=0";
+                    String imgSrcStr = getImageUrl(garageName);
                     Log.d("name", garageName);
                     Log.d("percentage", garagePercentage.text());
                     Log.d("pic", imgSrcStr);
@@ -118,6 +135,60 @@ public class MainActivity extends Activity {
             return null;
         }
 
+        private String getImageUrl(String garageName){
+            switch (garageName) {
+                case "West Lane Avenue":
+                    //   "West Lane Avenue";
+                    return MainActivity.WESTLANE;
+                case "Arps Hall":
+                    //  "Arps Hall";
+                    return  MainActivity.ARPSHALL;
+                case "Tuttle Park Place":
+                    //   "Tuttle Park Place";
+                    return MainActivity.TUTTLEPARKPLACE ;
+                case "9th Avenue East":
+                    //   "9th Avenue East";
+                    return MainActivity.NINTHAVENUEEAST;
+                case "Neil Avenue":
+                    //  "Neil Avenue";
+                    return MainActivity.NEILAVE;
+                case "11th Avenue":
+                    //  "11th Avenue";
+                    return MainActivity.ELEVENTHAVE;
+                case "South Gateway":
+                    //  "South Gateway";
+                    return MainActivity.SOUTHGATEWAY;
+                case "Lane Avenue":
+                    //  "Lane Avenue";
+                    return MainActivity.LANEAVE;
+                case "Ohio Union North":
+                    //  "Ohio Union North";
+                    return MainActivity.OHIOUNIONNORTH;
+                case "North Cannon":
+                    // "North Cannon";
+                    return MainActivity.NORTHCANNON;
+                case "Ohio Union South":
+                    //  "Ohio Union South";
+                    return MainActivity.OHIOUNIONSOUTH;
+                case "12th Avenue":
+                    //"12th Avenue";
+                    return MainActivity.TWELVEAVE;
+                case "SafeAuto Hospital":
+                    // "SafeAuto Hospital";
+                    return MainActivity.SAFEAUTO;
+                case "South Cannon":
+                    // "South Cannon";
+                    return MainActivity.SOUTHCANNON;
+                case "Northwest":
+                    //  "Northwest";
+                    return MainActivity.NINTHWEST;
+                case "9th Avenue West":
+                    // "9th Avenue West";
+                    return MainActivity.NORTHWEST;
+
+            }
+            return "";
+        }
 
             @Override
         protected void onPostExecute(Void result) {
