@@ -65,7 +65,7 @@ public class ListViewAdapter extends BaseAdapter {
         //population = (TextView) itemView.findViewById(R.id.population);
 
         // Locate the ImageView in listview_item.xml
-
+        flag = (ImageView) itemView.findViewById(R.id.flag);
 
         // Capture position and set results to the TextViews
         rank.setText(resultp.get(MainActivity.GARAGENAME));
@@ -74,7 +74,7 @@ public class ListViewAdapter extends BaseAdapter {
         // Capture position and set results to the ImageView
         // Passes flag images URL into ImageLoader.class
 
-       // imageLoader.DisplayImage(resultp.get(MainActivity.VISITORACCESS), flag);
+        imageLoader.DisplayImage(resultp.get(MainActivity.GARAGEPIC), flag);
         // Capture ListView item click
         itemView.setOnClickListener(new OnClickListener() {
 
@@ -92,7 +92,8 @@ public class ListViewAdapter extends BaseAdapter {
                 // Pass all data population
                 //intent.putExtra("population",resultp.get(MainActivity.POPULATION));
                 // Pass all data flag
-               // intent.putExtra("flag", resultp.get(MainActivity.VISITORACCESS));
+
+                intent.putExtra("flag", resultp.get(MainActivity.GARAGEPIC));
                 // Start SingleItemView Class
                 context.startActivity(intent);
 

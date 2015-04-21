@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
     static String GARAGENAME = "Garage Name";
     static String PERCENTAGE = "Percent Full";
     static String KEYCARDACCESS = "KeyCard Access";
-    static String VISITORACCESS = "Visitor Access";
+    static String GARAGEPIC = "Garage Pic";
     // URL Address
     String url = "http://osu.campusparc.com/Sitefinity/Public/Services/GarageGraph.asmx/load?GarageId=0&GradientBarWidth=190";
 
@@ -57,7 +57,7 @@ public class MainActivity extends Activity {
             // Create a progressdialog
             mProgressDialog = new ProgressDialog(MainActivity.this);
             // Set progressdialog title
-            mProgressDialog.setTitle("Android Jsoup ListView Tutorial");
+            mProgressDialog.setTitle("Gathering Garage data");
             // Set progressdialog message
             mProgressDialog.setMessage("Loading...");
             mProgressDialog.setIndeterminate(false);
@@ -92,7 +92,7 @@ public class MainActivity extends Activity {
                     String garageName = linkToGarage.text();
                     Element visitorAccess = row.select("td").get(3);
                     Element KeyCardAccess = row.select("td").get(4);
-                    String imgSrcStr = visitorAccess.attr("src");
+                    String imgSrcStr = "http://osu.campusparc.com/images/page-header/web-pageheader-9thwest.jpg?sfvrsn=0";
                     Log.d("name", garageName);
                     Log.d("percentage", garagePercentage.text());
                     Log.d("pic", imgSrcStr);
@@ -105,7 +105,7 @@ public class MainActivity extends Activity {
                     // Get the third td
                    // map.put("", tds.get(2).text());
                     // Get the image src links
-                  //  map.put("Visitor Access", imgSrcStr);
+                    map.put("Garage Pic", imgSrcStr);
                     // Set all extracted Jsoup Elements into the array
                     arraylist.add(map);
                 }
