@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
     static String PERCENTAGE = "Percent Full";
     static String KEYCARDACCESS = "KeyCard Access";
     static String GARAGEPIC = "Garage Pic";
+
     // URL Address
     String url = "http://osu.campusparc.com/Sitefinity/Public/Services/GarageGraph.asmx/load?GarageId=0&GradientBarWidth=190";
 
