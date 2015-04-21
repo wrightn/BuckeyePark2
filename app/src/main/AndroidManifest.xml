@@ -24,8 +24,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GarageMapActivity"
-            android:label="@string/title_activity_garage_map" >
+            android:name=".SingleItemView"
+            android:label="@string/single_item_view" >
         </activity>
     </application>
 

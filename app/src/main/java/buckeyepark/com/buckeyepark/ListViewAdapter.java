@@ -5,6 +5,7 @@ package buckeyepark.com.buckeyepark;
 
         import android.content.Context;
         import android.content.Intent;
+        import android.util.Log;
         import android.view.LayoutInflater;
         import android.view.View;
         import android.view.View.OnClickListener;
@@ -14,7 +15,7 @@ package buckeyepark.com.buckeyepark;
         import android.widget.TextView;
 
 public class ListViewAdapter extends BaseAdapter {
-
+    private final String tag = "tagged point";
     // Declare Variables
     Context context;
     LayoutInflater inflater;
@@ -84,8 +85,10 @@ public class ListViewAdapter extends BaseAdapter {
                 Intent intent = new Intent(context, SingleItemView.class);
                 // Pass all data rank
                 intent.putExtra("rank", resultp.get(MainActivity.GARAGENAME));
+                Log.d(tag,resultp.get(MainActivity.GARAGENAME));
                 // Pass all data country
                 intent.putExtra("country", resultp.get(MainActivity.PERCENTAGE));
+                Log.d(tag,resultp.get(MainActivity.PERCENTAGE));
                 // Pass all data population
                 //intent.putExtra("population",resultp.get(MainActivity.POPULATION));
                 // Pass all data flag

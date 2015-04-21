@@ -10,4 +10,5 @@
     <string name="countrylabel">"Country : "</string>
     <string name="populationlabel">"Population : "</string>
     <string name="title_activity_garage_map">GarageMapActivity</string>
+    <string name="single_item_view">Garage Info View</string>
 </resources>
