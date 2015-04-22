@@ -53,22 +53,12 @@ public class HorizontalBarChartActivity extends Activity implements OnChartValue
 
         mChart = (HorizontalBarChart) findViewById(R.id.chart1);
         mChart.setOnChartValueSelectedListener(this);
-        // mChart.setHighlightEnabled(false);
 
         mChart.setDrawBarShadow(false);
-
         mChart.setDrawValueAboveBar(false);
-
         mChart.setDescription("");
-
-        // scaling can now only be done on x- and y-axis separately
         mChart.setPinchZoom(false);
-
-
         mChart.setDrawGridBackground(false);
-
-
-        // mChart.setDrawYLabels(false);
 
         XAxis xl = mChart.getXAxis();
         xl.setPosition(XAxisPosition.BOTTOM);
@@ -81,18 +71,14 @@ public class HorizontalBarChartActivity extends Activity implements OnChartValue
         yl.setDrawGridLines(true);
         yl.setGridLineWidth(0.3f);
         yl.setAxisMaxValue((float) 100.00);
-//        yl.setInverted(true);
 
         YAxis yr = mChart.getAxisRight();
         yr.setDrawAxisLine(true);
         yr.setDrawGridLines(false);
-//        yr.setInverted(true);
 
         setData(12, 50);
         mChart.animateY(500);
 
-
-        // mChart.setDrawLegend(false);
     }
 
 
@@ -124,24 +110,20 @@ public class HorizontalBarChartActivity extends Activity implements OnChartValue
     @SuppressLint("NewApi")
     @Override
     public void onValueSelected(Entry entry, int i, Highlight highlight) {
-
-
         if (entry == null)
             return;
-        Log.i("entry", entry.toString());
+
         String garageTemp = entry.toString();
         String positionTemp[] = garageTemp.split(" ");
         String position = positionTemp[2];
         Log.i("position", position);
+
         String garageCurName = garageNames.get(Integer.valueOf(position));
+        Log.i("garageCurName ", garageCurName);
 
         Uri geoUri = Uri.parse(getGarageAddress(garageCurName));
         Intent mapCall = new Intent(Intent.ACTION_VIEW, geoUri);
         startActivity(mapCall);
-
-
-        Log.i("garageCurName ", garageCurName);
-
     }
 
     public void onNothingSelected() {
