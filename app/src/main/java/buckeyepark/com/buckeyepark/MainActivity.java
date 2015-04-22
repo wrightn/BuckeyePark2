@@ -127,7 +127,6 @@ public class MainActivity extends Activity {
                 html2 = html1.replaceAll("&gt;", ">");
 
                 Document doc_new = Jsoup.parse(html2);
-               // Elements table = doc_new.select("TABLE[class = graphDataTable multiple]");
                 for (Element table: doc_new.select("TABLE[class = graphDataTable multiple]")) {
                     HashMap<String, String> map = new HashMap<String, String>();
                     Element row = table.select("tr[class=graphDataRow]").first();

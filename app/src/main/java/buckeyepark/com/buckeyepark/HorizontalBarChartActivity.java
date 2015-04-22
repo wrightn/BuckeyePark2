@@ -2,9 +2,11 @@ package buckeyepark.com.buckeyepark;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.PointF;
 import android.graphics.RectF;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -34,12 +36,10 @@ import com.github.mikephil.charting.utils.Highlight;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class HorizontalBarChartActivity extends Activity {
+public class HorizontalBarChartActivity extends Activity implements OnChartValueSelectedListener {
     ArrayList<String> garageNames;
     ArrayList<String> garagePercents;
     protected HorizontalBarChart mChart;
-    private TextView tvX, tvY;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +52,12 @@ public class HorizontalBarChartActivity extends Activity {
         setContentView(R.layout.activity_horizontalbarchart);
 
         mChart = (HorizontalBarChart) findViewById(R.id.chart1);
+        mChart.setOnChartValueSelectedListener(this);
         // mChart.setHighlightEnabled(false);
 
         mChart.setDrawBarShadow(false);
 
-        mChart.setDrawValueAboveBar(true);
+        mChart.setDrawValueAboveBar(false);
 
         mChart.setDescription("");
 
@@ -66,18 +67,20 @@ public class HorizontalBarChartActivity extends Activity {
 
         mChart.setDrawGridBackground(false);
 
+
         // mChart.setDrawYLabels(false);
 
         XAxis xl = mChart.getXAxis();
         xl.setPosition(XAxisPosition.BOTTOM);
-        xl.setDrawAxisLine(true);
-        xl.setDrawGridLines(true);
+        xl.setDrawAxisLine(false);
+        xl.setDrawGridLines(false);
         xl.setGridLineWidth(0.3f);
 
         YAxis yl = mChart.getAxisLeft();
         yl.setDrawAxisLine(true);
         yl.setDrawGridLines(true);
         yl.setGridLineWidth(0.3f);
+        yl.setAxisMaxValue((float) 100.00);
 //        yl.setInverted(true);
 
         YAxis yr = mChart.getAxisRight();
@@ -86,7 +89,7 @@ public class HorizontalBarChartActivity extends Activity {
 //        yr.setInverted(true);
 
         setData(12, 50);
-        mChart.animateY(2500);
+        mChart.animateY(500);
 
 
         // mChart.setDrawLegend(false);
@@ -114,12 +117,88 @@ public class HorizontalBarChartActivity extends Activity {
 
         BarData data = new BarData(xVals, dataSets);
         data.setValueTextSize(10f);
-       // data.setValueTypeface(tf);
 
         mChart.setData(data);
     }
 
+    @SuppressLint("NewApi")
+    @Override
+    public void onValueSelected(Entry entry, int i, Highlight highlight) {
+
+
+        if (entry == null)
+            return;
+        Log.i("entry", entry.toString());
+        String garageTemp = entry.toString();
+        String positionTemp[] = garageTemp.split(" ");
+        String position = positionTemp[2];
+        Log.i("position", position);
+        String garageCurName = garageNames.get(Integer.valueOf(position));
+
+        Uri geoUri = Uri.parse(getGarageAddress(garageCurName));
+        Intent mapCall = new Intent(Intent.ACTION_VIEW, geoUri);
+        startActivity(mapCall);
+
+
+        Log.i("garageCurName ", garageCurName);
+
+    }
 
     public void onNothingSelected() {
     };
+
+    public String getGarageAddress(String garageName) {
+        switch (garageName) {
+            case "West Lane Avenue":
+                //   "West Lane Avenue";
+                return "geo:0,0?q=328 W. Lane Ave Columbus, Ohio";
+            case "Arps Hall":
+                //  "Arps Hall";
+                return "geo:0,0?q=1990 College Road Columbus, Ohio" ;
+            case "Tuttle Park Place":
+                //   "Tuttle Park Place";
+                return "geo:0,0?q=2050 Tuttle Park Place Columbus, Ohio" ;
+            case "9th Avenue East":
+                //   "9th Avenue East";
+                return "geo:0,0?q=345 West 9th Avenue Columbus, Ohio";
+            case "Neil Avenue":
+                //  "Neil Avenue";
+                return "geo:0,0?q=1801 Neil Avenue Columbus, Ohio";
+            case "11th Avenue":
+                //  "11th Avenue";
+                return "geo:0,0?q=229 West 11th Avenue Columbus, Ohio";
+            case "South Gateway":
+                //  "South Gateway";
+                return "geo:0,0?q=75 East 11th Avenue Columbus, Ohio";
+            case "Lane Avenue":
+                //  "Lane Avenue";
+                return "geo:0,0?q=2105 Neil Avenue Columbus, Ohio";
+            case "Ohio Union North":
+                //  "Ohio Union North";
+                return "geo:0,0?q=1780 College Road Columbus, Ohio";
+            case "North Cannon":
+                // "North Cannon";
+                return "geo:0,0?q=1640 Cannon Drive Ave Columbus, Ohio";
+            case "Ohio Union South":
+                //  "Ohio Union South";
+                return "geo:0,0?q=1759 North High Street Columbus, Ohio";
+            case "12th Avenue":
+                //"12th Avenue";
+                return "geo:0,0?q=340 West 12th Avenue Columbus, Ohio";
+            case "SafeAuto Hospital":
+                // "SafeAuto Hospital";
+                return "geo:0,0?q=1585 Westpark Street Columbus, Ohio";
+            case "South Cannon":
+                // "South Cannon";
+                return "geo:0,0?q=1640 Cannon Drive Columbus, Ohio";
+            case "Northwest":
+                //  "Northwest";
+                return "geo:0,0?q=271 Ives Drive  Columbus, Ohio";
+            case "9th Avenue West":
+                // "9th Avenue West";
+                return "geo:0,0?q=355 West 9th Avenue Columbus, Ohio";
+
+        }
+        return "";
+    }
 }

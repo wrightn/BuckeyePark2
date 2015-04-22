@@ -2,11 +2,13 @@ package buckeyepark.com.buckeyepark;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +21,7 @@ public class SingleItemView extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
-        String garageName = b.getString("rank");
+        final String garageName = b.getString("rank");
         String url = getGarageURL(garageName);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         mWebView = new WebView(this);
@@ -52,7 +54,7 @@ public class SingleItemView extends Activity {
         switch (garageName) {
             case "Click here to view fullness graph":
                 //   "West Lane Avenue";
-                return "http://osu.campusparc.com/osu/garages/west-lane";
+                return "http://maps.google.co.in/maps?q=345 West 9th Avenue, Columbus OH 43210";
             case "West Lane Avenue":
                 //   "West Lane Avenue";
                 return "http://osu.campusparc.com/osu/garages/west-lane";
@@ -105,4 +107,6 @@ public class SingleItemView extends Activity {
         }
         return "";
     }
+
+
 }
