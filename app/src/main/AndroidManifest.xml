@@ -23,6 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".HorizontalBarChartActivity"></activity>
         <activity
             android:name=".SingleItemView"
             android:label="@string/single_item_view" >

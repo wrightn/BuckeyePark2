@@ -15,22 +15,36 @@ import org.jsoup.select.Elements;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import android.content.Intent;
 import android.os.AsyncTask;
         import android.os.Bundle;
         import android.app.Activity;
         import android.app.ProgressDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
+
+import com.github.mikephil.charting.charts.HorizontalBarChart;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 public class MainActivity extends Activity {
+    private final String tag = "tagged point";
     ListView listview;
     ListViewAdapter adapter;
     ProgressDialog mProgressDialog;
     ArrayList<HashMap<String, String>> arraylist;
+    ArrayList<String> nameList;
+    ArrayList<String> percentList;
     static String GARAGENAME = "Garage Name";
     static String PERCENTAGE = "Percent Full";
     static String KEYCARDACCESS = "KeyCard Access";
@@ -61,6 +75,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         // Get the view from listview_main.xml
         setContentView(R.layout.listview_main);
+        Button clickButton = (Button) findViewById(R.id.graphButton);
+        clickButton.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Log.d(tag,"I see you clicking");
+                Intent intent = new Intent(MainActivity.this, HorizontalBarChartActivity.class);
+                intent.putExtra("name", nameList);
+                intent.putExtra("percent", percentList);
+                startActivity(intent);
+            }
+        });
         // Execute DownloadJSON AsyncTask
         new JsoupListView().execute();
 
@@ -87,6 +113,8 @@ public class MainActivity extends Activity {
         protected Void doInBackground(Void... params) {
             // Create an array
             arraylist = new ArrayList<HashMap<String, String>>();
+            nameList = new ArrayList<String>();
+            percentList = new ArrayList<String>();
 
             try {
                 String url = "http://osu.campusparc.com/Sitefinity/Public/Services/GarageGraph.asmx/load?GarageId=0&GradientBarWidth=190";
@@ -125,6 +153,8 @@ public class MainActivity extends Activity {
                     // Get the image src links
                     map.put("Garage Pic", imgSrcStr);
                     // Set all extracted Jsoup Elements into the array
+                    nameList.add(garageName);
+                    percentList.add(garagePercentage.text());
                     arraylist.add(map);
                 }
             }
@@ -200,7 +230,11 @@ public class MainActivity extends Activity {
             listview.setAdapter(adapter);
             // Close the progressdialog
             mProgressDialog.dismiss();
+
         }
     }
+
+
+
 
 }

@@ -50,6 +50,9 @@ public class SingleItemView extends Activity {
 
     public String getGarageURL(String garageName) {
         switch (garageName) {
+            case "Click here to view fullness graph":
+                //   "West Lane Avenue";
+                return "http://osu.campusparc.com/osu/garages/west-lane";
             case "West Lane Avenue":
                 //   "West Lane Avenue";
                 return "http://osu.campusparc.com/osu/garages/west-lane";
